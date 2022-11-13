@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskOrganizer.Interfaces;
 using TaskOrganizer.Model;
-using TaskOrganizer.Utility;
 
 namespace TaskOrganizer.Services
 {
@@ -19,52 +18,52 @@ namespace TaskOrganizer.Services
             _hcontext = new List<Holiday>()
             {
                 //January
-                new Holiday() { holiDate = "2022-1-2", holidayDescription = "poya day" },
-                new Holiday() { holiDate = "2022-1-8", holidayDescription = "international freedom day" },
+                new Holiday() { holiDate = "2022/01/02", holidayDescription = "poya day" },
+                new Holiday() { holiDate = "2022/01/08", holidayDescription = "international freedom day" },
 
                 //February
-                new Holiday() { holiDate = "2022-1-2", holidayDescription = "poya day" },
-                new Holiday() { holiDate = "2022-1-8", holidayDescription = "international freedom day" },
+                new Holiday() { holiDate = "2022/01/02", holidayDescription = "poya day" },
+                new Holiday() { holiDate = "2022/01/08", holidayDescription = "international freedom day" },
 
                 //March
-                new Holiday() { holiDate = "2022-1-2", holidayDescription = "poya day" },
-                new Holiday() { holiDate = "2022-1-8", holidayDescription = "international freedom day" },
+                new Holiday() { holiDate = "2022/01/02", holidayDescription = "poya day" },
+                new Holiday() { holiDate = "2022/01/08", holidayDescription = "international freedom day" },
 
                 //April
-                new Holiday() { holiDate = "2022-1-2", holidayDescription = "poya day" },
-                new Holiday() { holiDate = "2022-1-8", holidayDescription = "international freedom day" },
+                new Holiday() { holiDate = "2022/01/02", holidayDescription = "poya day" },
+                new Holiday() { holiDate = "2022/01/08", holidayDescription = "international freedom day" },
 
                 //May
-                new Holiday() { holiDate = "2022-1-2", holidayDescription = "poya day" },
-                new Holiday() { holiDate = "2022-1-8", holidayDescription = "international freedom day" },
+                new Holiday() { holiDate = "2022/01/02", holidayDescription = "poya day" },
+                new Holiday() { holiDate = "2022/01/08", holidayDescription = "international freedom day" },
 
                 //June
-                new Holiday() { holiDate = "2022-1-2", holidayDescription = "poya day" },
-                new Holiday() { holiDate = "2022-1-8", holidayDescription = "international freedom day" },
+                new Holiday() { holiDate = "2022/01/02", holidayDescription = "poya day" },
+                new Holiday() { holiDate = "2022/01/08", holidayDescription = "international freedom day" },
 
                 //July
-                new Holiday() { holiDate = "2022-1-2", holidayDescription = "poya day" },
-                new Holiday() { holiDate = "2022-1-8", holidayDescription = "international freedom day" },
+                new Holiday() { holiDate = "2022/01/02", holidayDescription = "poya day" },
+                new Holiday() { holiDate = "2022/01/08", holidayDescription = "international freedom day" },
 
                 //Aguest
-                new Holiday() { holiDate = "2022-1-2", holidayDescription = "poya day" },
-                new Holiday() { holiDate = "2022-1-8", holidayDescription = "international freedom day" },
+                new Holiday() { holiDate = "2022/01/02", holidayDescription = "poya day" },
+                new Holiday() { holiDate = "2022/08/23", holidayDescription = "international freedom day" },
 
                 //September
-                new Holiday() { holiDate = "2022-1-2", holidayDescription = "poya day" },
-                new Holiday() { holiDate = "2022-1-8", holidayDescription = "international freedom day" },
+                new Holiday() { holiDate = "2022/01/02", holidayDescription = "poya day" },
+                new Holiday() { holiDate = "2022/01/08", holidayDescription = "international freedom day" },
 
                 //Octomber
-                new Holiday() { holiDate = "2022-1-2", holidayDescription = "poya day" },
-                new Holiday() { holiDate = "2022-1-8", holidayDescription = "international freedom day" },
+                new Holiday() { holiDate = "2022/01/02", holidayDescription = "poya day" },
+                new Holiday() { holiDate = "2022/01/08", holidayDescription = "international freedom day" },
 
                 //November
-                new Holiday() { holiDate = "2022-1-2", holidayDescription = "poya day" },
-                new Holiday() { holiDate = "2022-1-8", holidayDescription = "international freedom day" },
+                new Holiday() { holiDate = "2022/01/02", holidayDescription = "poya day" },
+                new Holiday() { holiDate = "2022/01/08", holidayDescription = "international freedom day" },
 
                 //December
-                new Holiday() { holiDate = "2022-11-14", holidayDescription = "poya day" },
-                new Holiday() { holiDate = "2022-1-8", holidayDescription = "international freedom day" }
+                new Holiday() { holiDate = "2022/11/14", holidayDescription = "poya day" },
+                new Holiday() { holiDate = "2022/01/08", holidayDescription = "international freedom day" }
             };
         }
 

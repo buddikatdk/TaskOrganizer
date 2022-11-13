@@ -12,17 +12,19 @@ var holidayService = serviceProvider.GetService<iHolidayInterface>();
 TaskController task = new TaskController(holidayService);
 
 //Menu driven program
-Console.WriteLine("---------------------------------Task Organizer---------------------------------");
-Console.WriteLine();
-Console.WriteLine("1. Calculate my deadline ");
-Console.WriteLine("2. Re try ");
-Console.WriteLine("3. Exit ? (y/n) ");
-
-int option = Convert.ToInt32(Console.ReadLine());
-
-switch(option)
+int option;
+do
 {
-    case 1:
+    Console.WriteLine("---------------------------------Task Organizer---------------------------------");
+    Console.WriteLine();
+    Console.WriteLine("1. Calculate my deadline ");
+    Console.WriteLine("2. Re try ");
+    Console.WriteLine("3. Exit ? (y/n) ");
+
+    option = Convert.ToInt32(Console.ReadLine());
+
+    if(option == 1)
+    {
         DateTime endingDate;
         Console.WriteLine("Please Enter Starting date (format should be as MM/dd/yyyy)");
         DateTime date = Convert.ToDateTime(Console.ReadLine());
@@ -33,9 +35,14 @@ switch(option)
         Console.WriteLine();
         endingDate = Convert.ToDateTime(task.CalculateEndDate(date, dayCount));
         Console.WriteLine("Your task deadline will be " + endingDate);
-        break;
-    case 2:
-        break;
-    case 3:
-        break;
-}
+        Console.WriteLine("--------------------------------------------------------------------------------");
+        Console.WriteLine("Do you want to check again ? (y/n)");
+        string op = Console.ReadLine();
+        if(op == "y" || op == "Y"){option = 2;}else{option = 3;}
+    }
+    else if(option == 3)
+    {
+        return;
+    }
+}while(option == 2);
+

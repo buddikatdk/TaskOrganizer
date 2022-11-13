@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,38 +24,58 @@ namespace TaskOrganizer.Controllers
 
         public string CalculateEndDate(DateTime startingDate, int noOfDays)
         {
-
-            //first i get specified holidays from Holiday service
-            List<Holiday> holidays = _holidayService.GetSpecifiedHolidays();
-
             //initialize end date
             DateTime endingDate = startingDate;
             DateTime nowDate = startingDate;
+            int IsValidDateCount = 0;
 
             //then i put condition for checking stating date is holiday or not and by incrementing no of days
             do
             {
-                if (nowDate.DayOfWeek == DayOfWeek.Sunday || nowDate.DayOfWeek == DayOfWeek.Saturday)
+                if(IsValidDate(nowDate))
                 {
-                    endingDate = endingDate.AddDays(1);
+                    ++IsValidDateCount;
+                    nowDate = nowDate.AddDays(1);
+                }
+                else
+                {
+                    nowDate = nowDate.AddDays(1);
                 }
 
-                foreach (Holiday holiday in holidays)
-                {
-                    if(nowDate == Convert.ToDateTime(holiday.holiDate))
-                    {
-                        endingDate = endingDate.AddDays(1);
-                    }
-                }
+            } while (noOfDays > IsValidDateCount);
 
+            return IncrementalValidation(nowDate.AddDays(-1));
+        }
+
+        public bool IsValidDate(DateTime endingDate)
+        {
+            //first i get specified holidays from Holiday service
+            List<Holiday> holidays = _holidayService.GetSpecifiedHolidays();
+            bool isValid = false;
+            foreach (Holiday holiday in holidays)
+            {
+                DateTime hdate = DateTime.ParseExact(holiday.holiDate, "yyyy/MM/dd", CultureInfo.InvariantCulture);
+                if (hdate != endingDate && (hdate.DayOfWeek != DayOfWeek.Saturday || hdate.DayOfWeek != DayOfWeek.Sunday))
+                {
+                    isValid = true;
+                }
+            }
+
+            if(endingDate.DayOfWeek == DayOfWeek.Saturday || endingDate.DayOfWeek == DayOfWeek.Sunday)
+            {
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        public string IncrementalValidation(DateTime endingDate)
+        {
+            do
+            {
                 endingDate = endingDate.AddDays(1);
 
-                nowDate.AddDays(1);
-                noOfDays--;
-
-            } while (noOfDays == 0);
-            //also icheck startdate.daysOfWeek is week end or not
-            //then i calculate end date and return that date
+            } while (!IsValidDate(endingDate));
             return endingDate.ToLongDateString();
         }
     }
