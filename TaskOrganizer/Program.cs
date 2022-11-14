@@ -42,6 +42,7 @@ do
 
             do
             {
+                Console.WriteLine();
                 Console.WriteLine("Please Enter Starting date (format should be as MM/dd/yyyy)");
                 var dateString = Console.ReadLine();
                 if (validationService.DateValidation(dateString))
@@ -70,6 +71,7 @@ do
             Console.WriteLine();
             do
             {
+                Console.WriteLine();
                 Console.WriteLine("Please Enter Task effort(days requried)");
                 var dayCountString = Console.ReadLine();
                 if (validationService.NoOfDaysValidation(dayCountString))

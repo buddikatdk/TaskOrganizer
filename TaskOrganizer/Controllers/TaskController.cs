@@ -19,8 +19,7 @@ namespace TaskOrganizer.Controllers
             _holidayService = holidayService;
         }
 
-        //Controller for calculate the End date.
-        //retrive the Holydays from the holiday service
+        //Controller for calculate the Ending date.
 
         public string CalculateEndDate(DateTime startingDate, int noOfDays)
         {
@@ -39,7 +38,8 @@ namespace TaskOrganizer.Controllers
 
             } while ((noOfDays > IsValidDateCount));
 
-            return IncrementalValidation(nowDate);
+            //return IncrementalValidation(nowDate);
+            return nowDate.ToLongDateString();
         }
 
         public bool IsValidDate(DateTime endingDate)
@@ -67,19 +67,19 @@ namespace TaskOrganizer.Controllers
             return isValid;
         }
 
-        public string IncrementalValidation(DateTime endingDate)
-        {
-            //here we check weather end date is valid date or not
-            //if is that not valid working day then we increment day by keep checking
-            do
-            {
-                if(!IsValidDate(endingDate))
-                {
-                    endingDate = endingDate.AddDays(1);
-                }
+        //public string IncrementalValidation(DateTime endingDate)
+        //{
+        //    //here we check weather end date is valid date or not
+        //    //if is that not valid working day then we increment day by keep checking
+        //    do
+        //    {
+        //        if(!IsValidDate(endingDate))
+        //        {
+        //            endingDate = endingDate.AddDays(1);
+        //        }
 
-            } while (!IsValidDate(endingDate));
-            return endingDate.ToLongDateString();
-        }
+        //    } while (!IsValidDate(endingDate));
+        //    return endingDate.ToLongDateString();
+        //}
     }
 }
