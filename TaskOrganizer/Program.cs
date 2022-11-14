@@ -3,15 +3,15 @@ using Microsoft.Extensions.DependencyInjection;
 using TaskOrganizer.Controllers;
 using TaskOrganizer.Interfaces;
 using TaskOrganizer.Services;
-using TaskOrganizer.Utility.Validations;
 
-//Configure services =>  Dependancy Injection configure Holiday Service
+//Configure services =>  Dependancy Injection configure Holiday Service , Validation Service
 var serviceProvider = new ServiceCollection().AddSingleton<iHolidayInterface, iHolidayService>().BuildServiceProvider();
+var validationServiceProvider = new ServiceCollection().AddSingleton<iValidateInterface, iValidateService>().BuildServiceProvider();
 var holidayService = serviceProvider.GetService<iHolidayInterface>();
+var validationService = validationServiceProvider.GetService<iValidateInterface>();
 
 //Initiate objects
 TaskController task = new TaskController(holidayService);
-Validations validate = new Validations();
 
 //Menu driven program
 int option;
@@ -38,11 +38,28 @@ do
         try
         {
             Console.WriteLine("Please Enter Starting date (format should be as MM/dd/yyyy)");
-            date = Convert.ToDateTime(Console.ReadLine());
+            var dateString = Console.ReadLine();
+            if(validationService.DateValidation(dateString))
+            {
+                date = Convert.ToDateTime(dateString);
+            }else
+            {
+                Console.WriteLine("Please Enter Correct Starting date");
+                return;
+            }
             Console.WriteLine();
         
             Console.WriteLine("Please Enter Task effort(days requried)");
-            dayCount = Convert.ToInt32(Console.ReadLine());
+            var dayCountString = Console.ReadLine();
+            if (validationService.NoOfDaysValidation(dayCountString))
+            {
+                dayCount = Convert.ToInt32(dayCountString);
+            }
+            else
+            {
+                Console.WriteLine("Please Enter Correct day count");
+                return;
+            }
             Console.WriteLine();
 
             endingDate = Convert.ToDateTime(task.CalculateEndDate(date, dayCount));

@@ -58,7 +58,7 @@ namespace TaskOrganizerTest
             bool isValid = _controller.IsValidDate(date);
 
             //Assert
-            Assert.Equal(true, isValid);
+            Assert.True(isValid);
 
         }
     }
