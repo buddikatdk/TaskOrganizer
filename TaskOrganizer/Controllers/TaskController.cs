@@ -19,8 +19,8 @@ namespace TaskOrganizer.Controllers
             _holidayService = holidayService;
         }
 
-        //Controller for calculate the End date. I stored the logic here and return the Task End Date
-        //retrive the Holydays from the holyday service
+        //Controller for calculate the End date.
+        //retrive the Holydays from the holiday service
 
         public string CalculateEndDate(DateTime startingDate, int noOfDays)
         {
@@ -47,6 +47,8 @@ namespace TaskOrganizer.Controllers
             //first i get specified holidays from Holiday service
             List<Holiday> holidays = _holidayService.GetSpecifiedHolidays();
             bool isValid = true;
+
+            //here we checking current enddate not belongs to any specified holidays
             foreach (Holiday holiday in holidays)
             {
                 DateTime hdate = DateTime.ParseExact(holiday.holiDate, "yyyy/MM/dd", CultureInfo.InvariantCulture);
@@ -56,6 +58,7 @@ namespace TaskOrganizer.Controllers
                 }
             }
 
+            //also ensure that current date not weekend
             if(endingDate.DayOfWeek == DayOfWeek.Saturday || endingDate.DayOfWeek == DayOfWeek.Sunday)
             {
                 isValid = false;
@@ -66,6 +69,8 @@ namespace TaskOrganizer.Controllers
 
         public string IncrementalValidation(DateTime endingDate)
         {
+            //here we check weather end date is valid date or not
+            //if is that not valid working day then we increment day by keep checking
             do
             {
                 if(!IsValidDate(endingDate))
