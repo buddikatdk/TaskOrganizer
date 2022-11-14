@@ -34,7 +34,7 @@ namespace TaskOrganizer.Controllers
             {
                 if(IsValidDate(nowDate))
                 {
-                    ++IsValidDateCount;
+                    IsValidDateCount++;
                     nowDate = nowDate.AddDays(1);
                 }
                 else
@@ -42,9 +42,15 @@ namespace TaskOrganizer.Controllers
                     nowDate = nowDate.AddDays(1);
                 }
 
-            } while (noOfDays > IsValidDateCount);
+            } while ((noOfDays > IsValidDateCount));
 
-            return IncrementalValidation(nowDate.AddDays(-1));
+
+            //if(IsValidDateCount <= 2)
+            //{
+            //    nowDate = nowDate.AddDays(-1);
+            //    return IncrementalValidation(nowDate);
+            //}
+            return IncrementalValidation(nowDate);
         }
 
         public bool IsValidDate(DateTime endingDate)
@@ -73,7 +79,10 @@ namespace TaskOrganizer.Controllers
         {
             do
             {
-                endingDate = endingDate.AddDays(1);
+                if(!IsValidDate(endingDate))
+                {
+                    endingDate = endingDate.AddDays(1);
+                }
 
             } while (!IsValidDate(endingDate));
             return endingDate.ToLongDateString();
