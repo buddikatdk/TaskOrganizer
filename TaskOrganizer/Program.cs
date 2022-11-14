@@ -31,35 +31,70 @@ do
     if(option == 1)
     {
         DateTime endingDate;
-        bool dflag = false;
-        bool cflag = false;
         DateTime date = DateTime.Now;
         int dayCount = 0;
         try
         {
-            Console.WriteLine("Please Enter Starting date (format should be as MM/dd/yyyy)");
-            var dateString = Console.ReadLine();
-            if(validationService.DateValidation(dateString))
+            string doption = null;
+            string coption = null;
+            bool dflag = false;
+            bool cflag = false;
+
+            do
             {
-                date = Convert.ToDateTime(dateString);
-            }else
-            {
-                Console.WriteLine("Please Enter Correct Starting date");
-                return;
-            }
+                Console.WriteLine("Please Enter Starting date (format should be as MM/dd/yyyy)");
+                var dateString = Console.ReadLine();
+                if (validationService.DateValidation(dateString))
+                {
+                    date = Convert.ToDateTime(dateString);
+                    dflag = false;
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Validation failed when entering Staring date");
+                    Console.WriteLine("Do you want to enter staring date again ? (y/n) ");
+                    doption = Console.ReadLine();
+                    if (doption == "y" || doption == "Y")
+                    {
+                        dflag = true;
+                    }
+                    else
+                    {
+                        dflag = true;
+                        return;
+                    }
+                }
+            } while (dflag);
+           
             Console.WriteLine();
-        
-            Console.WriteLine("Please Enter Task effort(days requried)");
-            var dayCountString = Console.ReadLine();
-            if (validationService.NoOfDaysValidation(dayCountString))
+            do
             {
-                dayCount = Convert.ToInt32(dayCountString);
-            }
-            else
-            {
-                Console.WriteLine("Please Enter Correct day count");
-                return;
-            }
+                Console.WriteLine("Please Enter Task effort(days requried)");
+                var dayCountString = Console.ReadLine();
+                if (validationService.NoOfDaysValidation(dayCountString))
+                {
+                    dayCount = Convert.ToInt32(dayCountString);
+                    cflag = false;
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Validation failed when entering Day count");
+                    Console.WriteLine("Do you want to enter correct day count again ? (y/n)");
+                    coption = Console.ReadLine();
+                    if (coption == "y" || doption == "Y")
+                    {
+                        cflag = true;
+                    }
+                    else
+                    {
+                        cflag = true;
+                        return;
+                    };
+                }
+            } while (cflag);
+            
             Console.WriteLine();
 
             endingDate = Convert.ToDateTime(task.CalculateEndDate(date, dayCount));
