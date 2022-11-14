@@ -10,12 +10,12 @@ namespace TaskOrganizer.Services
 {
     public class iHolidayService : iHolidayInterface
     {
-        private readonly List<Holiday> _hcontext;
+        private readonly List<Holiday> _context;
 
         public iHolidayService()
         {
             //here we specifies the list of specfic holidays with description
-            _hcontext = new List<Holiday>()
+            _context = new List<Holiday>()
             {
                 //January
                 new Holiday() { holiDate = "2022/01/14", holidayDescription = "Tamil Thai Pongal day" },
@@ -75,7 +75,7 @@ namespace TaskOrganizer.Services
 
         public List<Holiday> GetSpecifiedHolidays()
         {
-            return _hcontext;
+            return _context;
         }
     }
 }

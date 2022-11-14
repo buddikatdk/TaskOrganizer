@@ -34,6 +34,32 @@ namespace TaskOrganizerTest
 
         }
 
+        [Fact]
+        public void Return_NearestWorking_Date()
+        {
+            //Arrange
+            DateTime date = Convert.ToDateTime("08/23/2022");
 
+            //Act
+            var endDate = Convert.ToDateTime(_controller.IncrementalValidation(date));
+
+            //Assert
+            Assert.Equal("08/24/2022", endDate.ToString("MM/dd/yyyy"));
+
+        }
+
+        [Fact]
+        public void Return_IsDateValid_WorkingDate()
+        {
+            //Arrange
+            DateTime date = Convert.ToDateTime("08/24/2022");
+
+            //Act
+            bool isValid = _controller.IsValidDate(date);
+
+            //Assert
+            Assert.Equal(true, isValid);
+
+        }
     }
 }
