@@ -24,32 +24,21 @@ namespace TaskOrganizer.Controllers
 
         public string CalculateEndDate(DateTime startingDate, int noOfDays)
         {
-            //initialize end date
-            DateTime endingDate = startingDate;
-            DateTime nowDate = startingDate;
+            //initialize current checking date
+            DateTime nowDate = startingDate.AddDays(-1);
             int IsValidDateCount = 0;
 
             //then i put condition for checking stating date is holiday or not and by incrementing no of days
             do
             {
-                if(IsValidDate(nowDate))
+                nowDate = nowDate.AddDays(1);
+                if (IsValidDate(nowDate))
                 {
                     IsValidDateCount++;
-                    nowDate = nowDate.AddDays(1);
-                }
-                else
-                {
-                    nowDate = nowDate.AddDays(1);
                 }
 
             } while ((noOfDays > IsValidDateCount));
 
-
-            //if(IsValidDateCount <= 2)
-            //{
-            //    nowDate = nowDate.AddDays(-1);
-            //    return IncrementalValidation(nowDate);
-            //}
             return IncrementalValidation(nowDate);
         }
 
@@ -57,13 +46,13 @@ namespace TaskOrganizer.Controllers
         {
             //first i get specified holidays from Holiday service
             List<Holiday> holidays = _holidayService.GetSpecifiedHolidays();
-            bool isValid = false;
+            bool isValid = true;
             foreach (Holiday holiday in holidays)
             {
                 DateTime hdate = DateTime.ParseExact(holiday.holiDate, "yyyy/MM/dd", CultureInfo.InvariantCulture);
-                if (hdate != endingDate && (hdate.DayOfWeek != DayOfWeek.Saturday || hdate.DayOfWeek != DayOfWeek.Sunday))
+                if (hdate == endingDate && (hdate.DayOfWeek != DayOfWeek.Saturday || hdate.DayOfWeek != DayOfWeek.Sunday))
                 {
-                    isValid = true;
+                    isValid = false;
                 }
             }
 

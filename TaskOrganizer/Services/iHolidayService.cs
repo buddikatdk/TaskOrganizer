@@ -53,6 +53,7 @@ namespace TaskOrganizer.Services
 
                 //Aguest
                 new Holiday() { holiDate = "2022/08/11", holidayDescription = "Nikini Full Moon Poya day" },
+                new Holiday() { holiDate = "2022/08/23", holidayDescription = "Test Case holiday" },
 
                 //September
                 new Holiday() { holiDate = "2022/09/10", holidayDescription = "Binara Full Moon Poya day" },
@@ -63,7 +64,6 @@ namespace TaskOrganizer.Services
 
                 //November
                 new Holiday() { holiDate = "2022/11/07", holidayDescription = "Ill Full Moon Poya day" },
-                new Holiday() { holiDate = "2022/11/14", holidayDescription = "Test Case holiday" },
 
                 //December
                 new Holiday() { holiDate = "2022/12/07", holidayDescription = "Unduvap Full Moon Poya day" },
