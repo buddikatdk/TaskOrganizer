@@ -37,5 +37,31 @@ namespace TaskOrganizerTest
             Assert.True(isValidNoOfDays);
 
         }
+
+        [Theory]
+        [InlineData("x")]
+        public void Should_Validate_Inputs_NoOfDays(string noOfDays)
+        {
+
+            //Act
+            var isValidNoOfDays = _validationService.NoOfDaysValidation(noOfDays);
+
+            //Assert
+            Assert.False(isValidNoOfDays);
+
+        }
+
+        [Theory]
+        [InlineData("2022/01/20")]
+        public void Should_Validate_Input_DateFormat(string value)
+        {
+
+            //Act
+            var isValidDateFormat = _validationService.DateValidation(value);
+
+            //Assert
+            Assert.False(isValidDateFormat);
+        }
+
     }
 }
